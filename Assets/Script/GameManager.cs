@@ -2,17 +2,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//该脚本主要目的在于解耦，将一些全局变量集中管理
 public class GameManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    static public GameManager _instance;
+    static public Player _currentPlayer; //记录当前玩家
+
+    void Awake()
     {
-        
+        //单例模式实现
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void RegisterPlayer(Player player) //注册玩家的函数
     {
-        
+        _currentPlayer = player;
+    }
+
+    public Player GetPlayer() //获取当前玩家
+    {
+        return _currentPlayer;
     }
 }
