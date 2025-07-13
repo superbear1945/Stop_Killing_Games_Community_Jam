@@ -6,7 +6,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     static public GameManager _instance;
-    static public Player _currentPlayer; //记录当前玩家
+    static public Player _currentPlayer; //记录当前玩家，可以在其它脚本中被获取
 
     void Awake()
     {
@@ -25,10 +25,5 @@ public class GameManager : MonoBehaviour
     public void RegisterPlayer(Player player) //注册玩家的函数
     {
         _currentPlayer = player;
-    }
-
-    public Player GetPlayer() //获取当前玩家
-    {
-        return _currentPlayer;
     }
 }
