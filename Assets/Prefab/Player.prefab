@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7262185368692889758}
   - component: {fileID: 2915093780108547417}
   - component: {fileID: 4815869922745959425}
+  - component: {fileID: 2709374116196719467}
   - component: {fileID: 5229291420477327624}
   - component: {fileID: 3372880991864228770}
   m_Layer: 6
@@ -144,6 +145,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d46301a07562e47a0ace9258580524, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2709374116196719467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6124863354402007016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d56a501e60dec734abd7cf41844bd1b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  castForce: 10
+  shootDelay: 0.5
+  _bait: {fileID: 6661358711788303047, guid: 24fbd2f0caa148747831bb174c0f3d2e, type: 3}
 --- !u!50 &5229291420477327624
 Rigidbody2D:
   serializedVersion: 4
@@ -207,7 +223,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.32, y: 0.32}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
