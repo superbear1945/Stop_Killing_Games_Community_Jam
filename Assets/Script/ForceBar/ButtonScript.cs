@@ -7,28 +7,28 @@ using UnityEngine;
 public class ButtonScript : MonoBehaviour
 {
     
-    public ForcePointerScript forcePointerScript;
+    [SerializeField] public ForcePointerScript forcePointerScript;
     //创建ForcePointerScript对象，方便引用当前力量值进行测试
     private void Start()
     {
-        forcePointerScript = GetComponent<ForcePointerScript>();
+        forcePointerScript = GameObject.Find("ForcePointer").GetComponent<ForcePointerScript>();
         if (forcePointerScript == null)
         {
-            Debug.LogError("forcePointerScript is missing from ForcePointer component");
+            Debug.LogError("Button:forcePointerScript is missing from ForcePointer component");
         }
     }
     public void AddForce()
     {
-        if (forcePointerScript.curForce <= forcePointerScript.maxForce)
+        if (forcePointerScript._curForce <= forcePointerScript._maxForce)
         {
-            forcePointerScript.curForce += 1;
+            forcePointerScript._curForce += 1;
         }
     }
     public void ReduceForce()
     {
-        if (forcePointerScript.curForce>=0)
+        if (forcePointerScript._curForce>=0)
         {
-            forcePointerScript.curForce -= 1;
+            forcePointerScript._curForce -= 1;
         }
     }
 }

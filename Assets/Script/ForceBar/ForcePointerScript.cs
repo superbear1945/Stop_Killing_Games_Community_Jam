@@ -8,43 +8,46 @@ using UnityEngine.UI;
 public class ForcePointerScript : MonoBehaviour
 {
     public Image forcePointerPos;
-    public GameObject forceBar;
-    //力气值指针位置与力气条数据声明
+    //力气值指针位置
 
-    public float maxForce;
-    public float curForce;
-    //力气最大值，最小值，当前值，控制力气变化的数值需要在此处对接
+    public float _maxForce;
+    public float _curForce;
+    //力气最大值，当前值
 
-    private float lerdSpeed = 20;
+    private float _lerdSpeed = 20;
     //力气条变化速率
+
+    UIManager _manager;
+    //调用UIManager脚本，获取力气值
 
     // Start is called before the first frame update
     void Start()
     {
         forcePointerPos = GetComponent<Image>();
-        forceBar = GetComponent<GameObject>();
         if (forcePointerPos == null)
         {
             Debug.LogError("ForcePointer component is missing from forcePointer component!");
         }
-        if(forceBar == null)
+        //初始化力气指示条位置
+
+        _manager = GameObject.Find("UIManager").GetComponent<UIManager>();
+        if (_manager == null)
         {
-            Debug.LogError("ForceBar component is missing from forceBar component!");
+            Debug.LogError("UIManager is missing from the scene!");
         }
-        maxForce = 100;
-        curForce = 75;
-        //数值初始化，实际使用中需要对接其他脚本获取当前力气值
+        _manager.SetForce(75, 100);//调用SetForce函数，设置初始力气值和最大值
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         ChangePos();
     }
 
     void ChangePos()
     {
-        forcePointerPos.fillAmount = Mathf.Lerp(a: forcePointerPos.fillAmount, b: curForce / maxForce, t: lerdSpeed * Time.deltaTime);
+        forcePointerPos.fillAmount = Mathf.Lerp(a: forcePointerPos.fillAmount, b: _curForce / _maxForce, t: _lerdSpeed * Time.deltaTime);
     }
 
 }
