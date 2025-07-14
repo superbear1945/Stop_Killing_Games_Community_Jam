@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2915093780108547417}
   - component: {fileID: 4815869922745959425}
   - component: {fileID: 2709374116196719467}
+  - component: {fileID: 7678173583311437821}
   - component: {fileID: 5229291420477327624}
   - component: {fileID: 3372880991864228770}
   m_Layer: 6
@@ -160,6 +161,18 @@ MonoBehaviour:
   castForce: 10
   shootDelay: 0.5
   _bait: {fileID: 6661358711788303047, guid: 24fbd2f0caa148747831bb174c0f3d2e, type: 3}
+--- !u!114 &7678173583311437821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6124863354402007016}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3d07035f4a37f4286468218c1c0201, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &5229291420477327624
 Rigidbody2D:
   serializedVersion: 4
@@ -186,7 +199,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!60 &3372880991864228770
 PolygonCollider2D:
   m_ObjectHideFlags: 0
