@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "StopKillingGame.sln"
+    "dotnet.defaultSolution": "Stop_Killing_Games_Community_Jam.sln"
 }
