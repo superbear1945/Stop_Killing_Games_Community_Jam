@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "CastLine",
+                    "name": "Shoot",
                     "type": "Button",
                     "id": "50ef62c2-5553-4e68-9568-c89572707007",
                     "expectedControlType": "",
@@ -92,18 +92,18 @@
                 {
                     "name": "",
                     "id": "44f3864a-57fc-40f1-a019-8750f1dd8c4f",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CastLine",
+                    "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "c3693445-7e8f-4119-b379-fea7bc60bfdc",
-                    "path": "<Mouse>/rightButton",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

@@ -2,26 +2,49 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Shoot : MonoBehaviour
 {
     [Header("甩杆参数")]
     public float castForce = 10f;      // 甩杆力度
     public float shootDelay = 0.5f;//甩杆动作延迟（s）
-    public GameObject yuEr;//鱼饵预制体
+    public GameObject _bait;//鱼饵预制体
     private bool isShooting = false;//是否开始钓鱼了
 
-    void Update()
+    PlayerInput _playerInput;
+    InputAction _shootAction;
+
+    void Awake()
     {
-        //检测右键是否按下
-        if (Input.GetMouseButtonDown(1) && !isShooting)
+        // 获取 PlayerInput 组件
+        _playerInput = GetComponent<PlayerInput>();
+        if (_playerInput == null)
         {
-            StartShoot();
+            Debug.LogError("未发现PlayerInput组件");
         }
+
+        //获取甩杆Action
+        _shootAction = _playerInput.actions["Shoot"];
+        if (_shootAction == null)
+        {
+            Debug.LogError("未发现Shoot Action");
+        }
+
+        //绑定甩杆事件
+        _shootAction.performed += StartShoot;
     }
 
-    void StartShoot()
+    void OnDisable()
     {
+        _shootAction.performed -= StartShoot;
+    }
+
+    void StartShoot(InputAction.CallbackContext context)
+    {
+        if (isShooting) //防止不停甩杆鬼畜
+            return;
+    
         isShooting = true;
         Debug.Log("开始甩杆！");
         //甩杆动作
@@ -29,21 +52,22 @@ public class Shoot : MonoBehaviour
         //生成鱼饵
         Invoke("SpawnBait", shootDelay);
     }
+
     void SpawnBait()
     {
-        if (yuEr != null)
+        if (_bait != null)
         {
             //生成鱼饵
             Vector2 spawnPos = (Vector2)transform.position + Vector2.right * 1f;//向右甩杆
             // 实例化鱼饵
-            GameObject bait = Instantiate(yuEr, spawnPos, Quaternion.identity);
+            GameObject baitInstance = Instantiate(_bait, spawnPos, Quaternion.identity);
              // 添加 2D 物理力
-            Rigidbody2D baitRb = bait.GetComponent<Rigidbody2D>();
+            Rigidbody2D baitRb = baitInstance.GetComponent<Rigidbody2D>();
             if (baitRb != null)
             {
                 baitRb.AddForce(Vector2.right * castForce, ForceMode2D.Impulse); // 向右施力
             }
         }
-        isShooting = false;
+        isShooting = false; //重置甩杆状态
     }
 }
