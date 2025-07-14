@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour
 {
@@ -14,5 +16,14 @@ public class UiManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    void GameStart()
+    {
+
+    }
+    void GameQuit()
+    {
+        Application.Quit();
     }
 }
