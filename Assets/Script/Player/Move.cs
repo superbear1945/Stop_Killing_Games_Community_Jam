@@ -40,6 +40,7 @@ public class Move : MonoBehaviour
 
     void FixedUpdate()
     {
-        _rb2d.MovePosition(_rb2d.position + _inputDirection * _moveSpeed * Time.fixedDeltaTime);
+        //_rb2d.MovePosition(_rb2d.position + _inputDirection * _moveSpeed * Time.fixedDeltaTime);
+        _rb2d.velocity = _inputDirection * _moveSpeed;
     }
 }

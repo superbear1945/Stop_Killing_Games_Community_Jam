@@ -58,7 +58,7 @@ public class Shoot : MonoBehaviour
         if (_bait != null)
         {
             //生成鱼饵
-            Vector2 spawnPos = (Vector2)transform.position + Vector2.right * 1f;//向右甩杆
+            Vector2 spawnPos = transform.position + transform.right * 1f;//向角色的右边甩杆
             // 实例化鱼饵
             GameObject baitInstance = Instantiate(_bait, spawnPos, Quaternion.identity);
              // 添加 2D 物理力
