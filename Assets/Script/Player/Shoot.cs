@@ -9,8 +9,8 @@ public class Shoot : MonoBehaviour
     [Header("甩杆参数")]
     public float castForce = 10f;      // 甩杆力度
     public float shootDelay = 0.5f;//甩杆动作延迟（s）
-    public GameObject _bait;//鱼饵预制体
-    private bool isShooting = false;//是否开始钓鱼了
+    public GameObject _bait;    //鱼饵预制体
+    private bool _isShooting = false; //是否开始钓鱼了
 
     PlayerInput _playerInput;
     InputAction _shootAction;
@@ -42,10 +42,10 @@ public class Shoot : MonoBehaviour
 
     void StartShoot(InputAction.CallbackContext context)
     {
-        if (isShooting) //防止不停甩杆鬼畜
+        if (_isShooting) //防止不停甩杆鬼畜
             return;
     
-        isShooting = true;
+        _isShooting = true;
         Debug.Log("开始甩杆！");
         //甩杆动作
         //GetComponent<Animator>().SetTrigger("Cast");
@@ -68,6 +68,6 @@ public class Shoot : MonoBehaviour
                 baitRb.AddForce(Vector2.right * castForce, ForceMode2D.Impulse); // 向右施力
             }
         }
-        isShooting = false; //重置甩杆状态
+        _isShooting = false; //重置甩杆状态
     }
 }
