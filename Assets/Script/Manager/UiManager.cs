@@ -6,14 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager instance;
-    [SerializeField] public ForcePointerScript forcePointerScript;
+    
+    public static UIManager _instance;
+    //Bear：在UIManager中，尽量使用Inspector拖拽的方式为属性赋值，比如下面的ForcePointerScript属性
+    [SerializeField] ForcePointerScript _forcePointerScript; //通过在Inspector中拖拽的方式获取力量表指针
     private void Awake()
     {
-        if (instance == null)
+        if (_instance == null)
         {
-            instance = this;
-
+            _instance = this;
+            DontDestroyOnLoad(gameObject); //Bear: 保持UIManager在场景切换时不被销毁
         }
         else
         {
@@ -23,29 +25,18 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        forcePointerScript = GameObject.Find("ForcePointer").GetComponent<ForcePointerScript>();
+        if(_forcePointerScript == null)
+            Debug.LogError("ForcePointerScript is not assigned in UIManager!");
     }
 
-    // Update is called once per frame
-    void Update()
+
+    //Bear: 为UI中的两个力量值提供数值的接口
+    public void SetForce(float curForce = 75, float maxForce = 100)
     {
-        
+        _forcePointerScript._curForce = curForce;
+        _forcePointerScript._maxForce = maxForce;
     }
-
-
-    //单例模型
-    void GameStart()
-    {
-
-    }
-    //切换场景，实现游戏开始，等待场景中
-
-    public void SetForce(float curForce = 75,float maxForce = 100)
-    {
-        forcePointerScript._curForce = curForce;
-        forcePointerScript._maxForce = maxForce;
-    }
-    //操作力气最大值，当前值的函数
+    
 
     void GameQuit()
     {

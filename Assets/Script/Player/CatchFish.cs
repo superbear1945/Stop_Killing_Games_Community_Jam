@@ -12,10 +12,13 @@ namespace FishingGame
         _Bigfish,
         _Smallfish
     }
+    
     //咬钩事件参数
-    public class FishBitingEventArgs : EventArgs {
-        public FishType FishType{ get; set; }
+    public class FishBitingEventArgs : EventArgs
+    {
+        public FishType FishType { get; set; }
     }
+    
     //咬钩检测系统
     public class BitingDetectionSystem
     {
@@ -37,12 +40,14 @@ namespace FishingGame
             ThreadPool.QueueUserWorkItem(_ => PerformDetection(cancellationTokenSource.Token));
         }
         //stop detection
-        public void StopDetection() {
+        public void StopDetection()
+        {
             cancellationTokenSource?.Cancel();
             Console.WriteLine("停止咬钩检测");
         }
         //begin detection
-        private void PerformDetection(CancellationToken cancellationToken) {
+        private void PerformDetection(CancellationToken cancellationToken)
+        {
             while (!cancellationToken.IsCancellationRequested)
             {
                 //one detect/0.2s
@@ -58,7 +63,8 @@ namespace FishingGame
             }
         }
         //判定是否有鱼咬钩
-        private FishType DetermineFishBiting() {
+        private FishType DetermineFishBiting()
+        {
             double randomValue = random.NextDouble();
             if (randomValue < 0.05)//0.05 shark
             {

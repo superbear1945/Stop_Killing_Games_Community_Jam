@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using UnityEngine.UI;
 
+
+
 public class ForcePointerScript : MonoBehaviour
 {
     public Image forcePointerPos;
@@ -27,8 +29,9 @@ public class ForcePointerScript : MonoBehaviour
         }
         //初始化力气指示条位置
 
-        
-        UIManager.instance.SetForce(75, 100);//调用SetForce函数，设置初始力气值和最大值
+        //Bear: UIManager的正确用法如下，不需要想办法获取到UIManager实例，直接通过类名调用_instance即可
+        //Bear: 不需要先定义一个UIManager属性，再在通过FindObjectByTag获取
+        UIManager._instance.SetForce();//调用SetForce函数，使用当前力气值和最大力气值
     }
 
     // Update is called once per frame
