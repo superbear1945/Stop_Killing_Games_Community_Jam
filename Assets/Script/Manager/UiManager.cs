@@ -42,13 +42,20 @@ public class UIManager : MonoBehaviour
     //Bear：增加力量值的方法，会在FightFish中按住左键时被使用
     public void AddForce()
     {
-        _forcePointerScript._curForce += _forcePointerScript._lerdSpeed * Time.deltaTime;
+        if(_forcePointerScript._curForce <  _forcePointerScript._maxForce)
+        {
+            _forcePointerScript._curForce += _forcePointerScript._lerdSpeed * Time.deltaTime;
+        }
     }
 
     //Bear：减少力量值的方法，会在FightFish中松开左键时被使用
     public void ReduceForce()
     {
-        _forcePointerScript._curForce -= _forcePointerScript._lerdSpeed * Time.deltaTime;
+        if (_forcePointerScript._curForce > 0)
+        {
+            _forcePointerScript._curForce -= _forcePointerScript._lerdSpeed * Time.deltaTime;
+        }
+        
     }
 
     void GameQuit()
