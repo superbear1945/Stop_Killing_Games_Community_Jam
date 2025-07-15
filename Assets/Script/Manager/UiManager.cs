@@ -36,7 +36,16 @@ public class UIManager : MonoBehaviour
         _forcePointerScript._curForce = curForce;
         _forcePointerScript._maxForce = maxForce;
     }
-    
+
+    public void OnMouseHold()
+    {
+        Debug.Log("力量增加");
+    }
+
+    public void OnMouseLeftRelease()
+    {
+        Debug.Log("力量释放");
+    }
 
     void GameQuit()
     {

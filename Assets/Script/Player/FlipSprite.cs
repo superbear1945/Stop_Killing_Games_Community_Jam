@@ -16,7 +16,6 @@ public class FlipSprite : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(_rb2d.velocity.x);
         if (_rb2d.velocity.x > 0)
             transform.localScale = new Vector3(1, 1, 1);
         else if (_rb2d.velocity.x < 0)
