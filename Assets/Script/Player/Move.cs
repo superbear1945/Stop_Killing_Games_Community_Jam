@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 
-//¿ÉÒÔÓÃ×÷²Î¿¼£¬µ«ÊÇ½¨ÒéÄãÃÇÔÙ×Ô¼ºÖØĞÂĞ´Ò»±éÒÆ¶¯Âß¼­
+//å¯ä»¥ç”¨ä½œå‚è€ƒï¼Œä½†æ˜¯å»ºè®®ä½ ä»¬å†è‡ªå·±é‡æ–°å†™ä¸€éç§»åŠ¨é€»è¾‘
 public class Move : MonoBehaviour
 {
     PlayerInput _playerInput;
@@ -12,25 +12,25 @@ public class Move : MonoBehaviour
     Vector2 _inputDirection;
     Rigidbody2D _rb2d;
 
-    [Header("ÒÆ¶¯ÉèÖÃ")]
+    [Header("ç§»åŠ¨è®¾ç½®")]
     [SerializeField] float _moveSpeed = 5f;
 
     void Awake()
     {
-        //»ñÈ¡PlayerInput×é¼ş
+        //è·å–PlayerInputç»„ä»¶
         _playerInput = GetComponent<PlayerInput>();
         if (_playerInput == null)
-            Debug.LogError("Ã»ÕÒµ½PlayerInput×é¼ş");
+            Debug.LogError("æ²¡æ‰¾åˆ°PlayerInputç»„ä»¶");
 
-        //»ñÈ¡ÒÆ¶¯ÊäÈë
+        //è·å–ç§»åŠ¨è¾“å…¥
         _moveAction = _playerInput.actions["Move"];
         if (_moveAction == null)
-            Debug.LogError("Ã»ÕÒµ½ÒÆ¶¯ÊäÈë");
+            Debug.LogError("æ²¡æ‰¾åˆ°ç§»åŠ¨è¾“å…¥");
 
-        //»ñÈ¡Rigidbody2D×é¼ş
+        //è·å–Rigidbody2Dç»„ä»¶
         _rb2d = GetComponent<Rigidbody2D>();
         if (_rb2d == null)
-            Debug.LogError("Ã»ÕÒµ½Rigidbody2D×é¼ş");
+            Debug.LogError("æ²¡æ‰¾åˆ°Rigidbody2Dç»„ä»¶");
     }
 
     void Update()

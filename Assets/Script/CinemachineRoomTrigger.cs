@@ -5,23 +5,23 @@ using UnityEngine;
 public class CinemachineRoomTrigger : MonoBehaviour
 {
     Cinemachine.CinemachineVirtualCamera _virtualCamera;
-    int _activePriority = 11; // 摄像机激活时的优先级
-    int _inactivePriority = 10; // 摄像机非激活时的优先级
+    int _activePriority = 11; // 鎽勫儚鏈烘縺娲绘椂鐨勪紭鍏堢骇
+    int _inactivePriority = 10; // 鎽勫儚鏈洪潪婵�娲绘椂鐨勪紭鍏堢骇
 
     void Awake()
     {
         _virtualCamera = GetComponentInParent<Cinemachine.CinemachineVirtualCamera>();
         if (_virtualCamera == null)
-            Debug.LogError("没找到CinemachineVirtualCamera组件");
+            Debug.LogError("娌℃壘鍒癈inemachineVirtualCamera缁勪欢");
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            //玩家进入区域时，提升摄像机优先级
+            //鐜╁杩涘叆鍖哄煙鏃讹紝鎻愬崌鎽勫儚鏈轰紭鍏堢骇
             _virtualCamera.Priority = _activePriority;
-            Debug.Log(collision.name + " 进入了触发器区域，激活摄像机");
+            Debug.Log(collision.name + " 杩涘叆浜嗚Е鍙戝櫒鍖哄煙锛屾縺娲绘憚鍍忔満");
         }
     }
 
@@ -29,9 +29,9 @@ public class CinemachineRoomTrigger : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //玩家离开区域时，降低摄像机优先级
+            //鐜╁绂诲紑鍖哄煙鏃讹紝闄嶄綆鎽勫儚鏈轰紭鍏堢骇
             _virtualCamera.Priority = _inactivePriority;
-            Debug.Log(collision.name + " 离开了触发器区域，停用摄像机");
+            Debug.Log(collision.name + " 绂诲紑浜嗚Е鍙戝櫒鍖哄煙锛屽仠鐢ㄦ憚鍍忔満");
         }
     }
 

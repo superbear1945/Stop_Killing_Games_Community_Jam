@@ -5,41 +5,41 @@ using System.Threading;
 using UnityEngine;
 namespace FishingGame
 {
-    //ÓãµÄÀàĞÍÃ¶¾Ù
+    //é±¼çš„ç±»å‹æšä¸¾
     public enum FishType {
         _None,
         _Shark,
         _Bigfish,
         _Smallfish
     }
-    //Ò§¹³ÊÂ¼ş²ÎÊı
+    //å’¬é’©äº‹ä»¶å‚æ•°
     public class FishBitingEventArgs : EventArgs {
         public FishType FishType{ get; set; }
     }
-    //Ò§¹³¼ì²âÏµÍ³
+    //å’¬é’©æ£€æµ‹ç³»ç»Ÿ
     public class BitingDetectionSystem
     {
         private readonly System.Random random = new System.Random();
         private CancellationTokenSource cancellationTokenSource;
-        //Ò§¹³ÊÂ¼ş
+        //å’¬é’©äº‹ä»¶
         public event EventHandler<FishBitingEventArgs> FishBiting;
-        //¿ªÊ¼¼ì²âÒ§¹³
+        //å¼€å§‹æ£€æµ‹å’¬é’©
         public void StartDetection()
         {
-            Console.WriteLine("Ë¦¸Ë¶¯×÷Íê³É£¬×¼±¸¿ªÊ¼¼ì²âÒ§¹³...");
+            Console.WriteLine("ç”©æ†åŠ¨ä½œå®Œæˆï¼Œå‡†å¤‡å¼€å§‹æ£€æµ‹å’¬é’©...");
             //wait 1s
             Thread.Sleep(1000);
-            Console.WriteLine("¿ªÊ¼¼ì²âÒ§¹³...");
+            Console.WriteLine("å¼€å§‹æ£€æµ‹å’¬é’©...");
 
             cancellationTokenSource = new CancellationTokenSource();
 
-            //Ê¹ÓÃÏß³Ì³ØÖ´ĞĞ¶¨Ê±¼ì²âÈÎÎñ
+            //ä½¿ç”¨çº¿ç¨‹æ± æ‰§è¡Œå®šæ—¶æ£€æµ‹ä»»åŠ¡
             ThreadPool.QueueUserWorkItem(_ => PerformDetection(cancellationTokenSource.Token));
         }
         //stop detection
         public void StopDetection() {
             cancellationTokenSource?.Cancel();
-            Console.WriteLine("Í£Ö¹Ò§¹³¼ì²â");
+            Console.WriteLine("åœæ­¢å’¬é’©æ£€æµ‹");
         }
         //begin detection
         private void PerformDetection(CancellationToken cancellationToken) {
@@ -47,38 +47,38 @@ namespace FishingGame
             {
                 //one detect/0.2s
                 Thread.Sleep(200);
-                //½øĞĞÒ§¹³ÅĞ¶¨
+                //è¿›è¡Œå’¬é’©åˆ¤å®š
                 var result = DetermineFishBiting();
                 if (result != FishType._None)
                 {
-                    //´¥·¢Ò§¹³ÊÂ¼ş
+                    //è§¦å‘å’¬é’©äº‹ä»¶
                     OnFishBiting(new FishBitingEventArgs { FishType = result });
                     break;
                 }
             }
         }
-        //ÅĞ¶¨ÊÇ·ñÓĞÓãÒ§¹³
+        //åˆ¤å®šæ˜¯å¦æœ‰é±¼å’¬é’©
         private FishType DetermineFishBiting() {
             double randomValue = random.NextDouble();
             if (randomValue < 0.05)//0.05 shark
             {
-                Console.WriteLine("¼ì²âµ½ÓĞÓãÒ§¹³£¡ÕıÔÚÈ·¶¨ÓãµÄÖÖÀà...");
+                Console.WriteLine("æ£€æµ‹åˆ°æœ‰é±¼å’¬é’©ï¼æ­£åœ¨ç¡®å®šé±¼çš„ç§ç±»...");
                 return FishType._Shark;
             }
             else if (randomValue < 0.15)//0.1 bigfish
             {
-                Console.WriteLine("¼ì²âµ½ÓĞÓãÒ§¹³£¡ÕıÔÚÈ·¶¨ÓãµÄÖÖÀà...");
+                Console.WriteLine("æ£€æµ‹åˆ°æœ‰é±¼å’¬é’©ï¼æ­£åœ¨ç¡®å®šé±¼çš„ç§ç±»...");
                 return FishType._Bigfish;
             }
             else if (randomValue < 0.3)//0.15 small fish
             {
-                Console.WriteLine("¼ì²âµ½ÓĞÓãÒ§¹³£¡ÕıÔÚÈ·¶¨ÓãµÄÖÖÀà...");
+                Console.WriteLine("æ£€æµ‹åˆ°æœ‰é±¼å’¬é’©ï¼æ­£åœ¨ç¡®å®šé±¼çš„ç§ç±»...");
                 return FishType._Smallfish;
             }
-            Console.WriteLine("±¾´Î¼ì²âÃ»ÓĞÓãÒ§¹³");
+            Console.WriteLine("æœ¬æ¬¡æ£€æµ‹æ²¡æœ‰é±¼å’¬é’©");
             return FishType._None;
         }
-        // ´¥·¢Ò§¹³ÊÂ¼şµÄ·½·¨
+        // è§¦å‘å’¬é’©äº‹ä»¶çš„æ–¹æ³•
         protected virtual void OnFishBiting(FishBitingEventArgs e)
         {
             FishBiting?.Invoke(this, e);

@@ -8,10 +8,10 @@ public class FlipSprite : MonoBehaviour
 
     void Awake()
     {
-        // 获取 Rigidbody2D 组件
+        // 鑾峰彇 Rigidbody2D 缁勪欢
         _rb2d = GetComponent<Rigidbody2D>();
         if (_rb2d == null)
-            Debug.LogError("未找到Rigidbody2D组件");
+            Debug.LogError("鏈壘鍒癛igidbody2D缁勪欢");
     }
 
     void FixedUpdate()

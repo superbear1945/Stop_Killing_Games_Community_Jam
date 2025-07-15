@@ -8,17 +8,17 @@ using UnityEngine.UI;
 public class ForcePointerScript : MonoBehaviour
 {
     public Image forcePointerPos;
-    //Á¦ÆøÖµÖ¸ÕëÎ»ÖÃ
+    //åŠ›æ°”å€¼æŒ‡é’ˆä½ç½®
 
     public float _maxForce;
     public float _curForce;
-    //Á¦Æø×î´óÖµ£¬µ±Ç°Öµ
+    //åŠ›æ°”æœ€å¤§å€¼ï¼Œå½“å‰å€¼
 
     private float _lerdSpeed = 20;
-    //Á¦ÆøÌõ±ä»¯ËÙÂÊ
+    //åŠ›æ°”æ¡å˜åŒ–é€Ÿç‡
 
     UIManager _manager;
-    //µ÷ÓÃUIManager½Å±¾£¬»ñÈ¡Á¦ÆøÖµ
+    //è°ƒç”¨UIManagerè„šæœ¬ï¼Œè·å–åŠ›æ°”å€¼
 
     // Start is called before the first frame update
     void Start()
@@ -28,14 +28,14 @@ public class ForcePointerScript : MonoBehaviour
         {
             Debug.LogError("ForcePointer component is missing from forcePointer component!");
         }
-        //³õÊ¼»¯Á¦ÆøÖ¸Ê¾ÌõÎ»ÖÃ
+        //åˆå§‹åŒ–åŠ›æ°”æŒ‡ç¤ºæ¡ä½ç½®
 
         _manager = GameObject.Find("UIManager").GetComponent<UIManager>();
         if (_manager == null)
         {
             Debug.LogError("UIManager is missing from the scene!");
         }
-        _manager.SetForce(75, 100);//µ÷ÓÃSetForceº¯Êı£¬ÉèÖÃ³õÊ¼Á¦ÆøÖµºÍ×î´óÖµ
+        _manager.SetForce(75, 100);//è°ƒç”¨SetForceå‡½æ•°ï¼Œè®¾ç½®åˆå§‹åŠ›æ°”å€¼å’Œæœ€å¤§å€¼
     }
 
     // Update is called once per frame
