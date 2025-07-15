@@ -17,9 +17,6 @@ public class ForcePointerScript : MonoBehaviour
     private float _lerdSpeed = 20;
     //力气条变化速率
 
-    UIManager _manager;
-    //调用UIManager脚本，获取力气值
-
     // Start is called before the first frame update
     void Start()
     {
@@ -30,18 +27,13 @@ public class ForcePointerScript : MonoBehaviour
         }
         //初始化力气指示条位置
 
-        _manager = GameObject.Find("UIManager").GetComponent<UIManager>();
-        if (_manager == null)
-        {
-            Debug.LogError("UIManager is missing from the scene!");
-        }
-        _manager.SetForce(75, 100);//调用SetForce函数，设置初始力气值和最大值
+        
+        UIManager.instance.SetForce(75, 100);//调用SetForce函数，设置初始力气值和最大值
     }
 
     // Update is called once per frame
     void Update()
     {
-        
         ChangePos();
     }
 
