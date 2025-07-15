@@ -42,13 +42,12 @@ public class Shoot : MonoBehaviour
 
     void StartShoot(InputAction.CallbackContext context)
     {
-        if (_isShooting) //防止不停甩杆鬼畜
-            return;
-    
+        if (_isShooting) return; //防止不停甩杆鬼畜
+
         _isShooting = true;
         Debug.Log("开始甩杆！");
         //甩杆动作
-        //GetComponent<Animator>().SetTrigger("Cast");
+        GetComponent<Animator>().SetTrigger("Shoot");
         //生成鱼饵
         Invoke("SpawnBait", shootDelay);
     }
@@ -57,16 +56,17 @@ public class Shoot : MonoBehaviour
     {
         if (_bait != null)
         {
+            GameManager._instance._isFishBite = true; //设置鱼咬钩状态
+            Vector3 playerDirection = new Vector3(transform.localScale.x, 0, 0); //获取玩家方向
             //生成鱼饵
-            Vector2 spawnPos = transform.position + transform.right * 1f;//向角色的右边甩杆
+            Vector2 spawnPos = transform.position + playerDirection * 1f;//向角色的右边甩杆
             // 实例化鱼饵
             GameObject baitInstance = Instantiate(_bait, spawnPos, Quaternion.identity);
-             // 添加 2D 物理力
-            Rigidbody2D baitRb = baitInstance.GetComponent<Rigidbody2D>();
-            if (baitRb != null)
-            {
-                baitRb.AddForce(Vector2.right * castForce, ForceMode2D.Impulse); // 向右施力
-            }
+            GameManager._instance._currentBait = baitInstance; //记录当前鱼饵
+        }
+        else
+        {
+            Debug.LogError("未设置鱼饵预制体");
         }
         _isShooting = false; //重置甩杆状态
     }

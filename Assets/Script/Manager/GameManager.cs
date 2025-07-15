@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
      //用于判断鱼是否咬钩，因为很多地方可能都会用到这个判断，所以放入GameManager中供全局使用
     public bool _isFishBite = false;
 
+    public GameObject _currentBait; // 当前鱼饵的引用
+
     void Awake()
     {
         // 实现单例模式
