@@ -33,19 +33,19 @@ public class UIManager : MonoBehaviour
     }
 
 
-    //µ¥ÀıÄ£ĞÍ
+    //å•ä¾‹æ¨¡å‹
     void GameStart()
     {
 
     }
-    //ÇĞ»»³¡¾°£¬ÊµÏÖÓÎÏ·¿ªÊ¼£¬µÈ´ı³¡¾°ÖĞ
+    //åˆ‡æ¢åœºæ™¯ï¼Œå®ç°æ¸¸æˆå¼€å§‹ï¼Œç­‰å¾…åœºæ™¯ä¸­
 
     public void SetForce(float curForce = 75,float maxForce = 100)
     {
         forcePointerScript._curForce = curForce;
         forcePointerScript._maxForce = maxForce;
     }
-    //²Ù×÷Á¦Æø×î´óÖµ£¬µ±Ç°ÖµµÄº¯Êı
+    //æ“ä½œåŠ›æ°”æœ€å¤§å€¼ï¼Œå½“å‰å€¼çš„å‡½æ•°
 
     void GameQuit()
     {

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//¸Ã½Å±¾½öÓÃÓÚ²âÊÔÁ¦Á¿Ìõ¹¦ÄÜ£¬²»²ÎÓëÕıÊ½ÓÎÏ·Á÷³Ì
+//è¯¥è„šæœ¬ä»…ç”¨äºæµ‹è¯•åŠ›é‡æ¡åŠŸèƒ½ï¼Œä¸å‚ä¸æ­£å¼æ¸¸æˆæµç¨‹
 public class ButtonScript : MonoBehaviour
 {
     
     [SerializeField] public ForcePointerScript forcePointerScript;
-    //´´½¨ForcePointerScript¶ÔÏó£¬·½±ãÒıÓÃµ±Ç°Á¦Á¿Öµ½øĞĞ²âÊÔ
+    //åˆ›å»ºForcePointerScriptå¯¹è±¡ï¼Œæ–¹ä¾¿å¼•ç”¨å½“å‰åŠ›é‡å€¼è¿›è¡Œæµ‹è¯•
     private void Start()
     {
         forcePointerScript = GameObject.Find("ForcePointer").GetComponent<ForcePointerScript>();
