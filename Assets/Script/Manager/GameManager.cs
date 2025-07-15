@@ -2,27 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//璇ヨ剼鏈�涓昏�佺洰鐨勫湪浜庤В鑰︼紝灏嗕竴浜涘叏灞€鍙橀噺闆嗕腑绠＄悊
 public class GameManager : MonoBehaviour
 {
-    static public GameManager _instance;
-    static public Player _currentPlayer; //璁板綍褰撳墠鐜╁�讹紝鍙�浠ュ湪鍏跺畠鑴氭湰涓�琚�鑾峰彇
+    static public GameManager _instance; // 单例实例
+    static public Player _currentPlayer; // 当前玩家的引用
+    public bool _isFishBite = false; //用于判断鱼是否咬钩
 
     void Awake()
     {
-        //鍗曚緥妯″紡瀹炵幇
+        // 实现单例模式
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); // 切换场景时不销毁该对象
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // 如果实例已存在，则销毁当前对象
         }
     }
 
-    public void RegisterPlayer(Player player) //娉ㄥ唽鐜╁�剁殑鍑芥暟
+    // 注册玩家
+    public void RegisterPlayer(Player player)
     {
         _currentPlayer = player;
     }

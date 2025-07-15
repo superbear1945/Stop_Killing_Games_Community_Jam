@@ -37,14 +37,18 @@ public class UIManager : MonoBehaviour
         _forcePointerScript._maxForce = maxForce;
     }
 
-    public void OnMouseHold()
+
+    //Bear：不乘以Time.deltaTime的话会导致帧数不同的人力量条增减速度不一致
+    //Bear：增加力量值的方法，会在FightFish中按住左键时被使用
+    public void AddForce()
     {
-        Debug.Log("力量增加");
+        _forcePointerScript._curForce += _forcePointerScript._lerdSpeed * Time.deltaTime;
     }
 
-    public void OnMouseLeftRelease()
+    //Bear：减少力量值的方法，会在FightFish中松开左键时被使用
+    public void ReduceForce()
     {
-        Debug.Log("力量释放");
+        _forcePointerScript._curForce -= _forcePointerScript._lerdSpeed * Time.deltaTime;
     }
 
     void GameQuit()

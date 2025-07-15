@@ -16,7 +16,7 @@ public class ForcePointerScript : MonoBehaviour
     public float _curForce;
     //力气最大值，当前值
 
-    private float _lerdSpeed = 20;
+    public float _lerdSpeed = 5;
     //力气条变化速率
 
     // Start is called before the first frame update
@@ -27,8 +27,8 @@ public class ForcePointerScript : MonoBehaviour
         {
             Debug.LogError("ForcePointer component is missing from forcePointer component!");
         }
-        //初始化力气指示条位置
 
+        //初始化力气指示条位置
         //Bear: 不需要先定义一个UIManager属性，再在通过FindObjectByTag获取
         //Bear: UIManager的正确用法如下，不需要想办法获取到UIManager实例，直接通过类名调用_instance即可
         UIManager._instance.SetForce();//调用SetForce函数，使用当前力气值和最大力气值
