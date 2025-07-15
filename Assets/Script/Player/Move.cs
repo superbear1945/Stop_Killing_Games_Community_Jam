@@ -41,6 +41,7 @@ public class Move : MonoBehaviour
     void FixedUpdate()
     {
         //_rb2d.MovePosition(_rb2d.position + _inputDirection * _moveSpeed * Time.fixedDeltaTime);
+        if(GameManager._instance._isFishBite) return; //如果鱼咬钩了，就不允许移动
         _rb2d.velocity = _inputDirection * _moveSpeed;
     }
 }
