@@ -9,7 +9,7 @@ public class Player : MonoBehaviour
     {
         if (GameManager._instance != null)
         {
-            GameManager._instance.RegisterPlayer(this); //娉ㄥ唽褰撳墠鐜╁锛屽湪鍏跺畠鑴氭湰涓彲浠ラ�氳繃GameManager鑾峰彇鐜╁
+            GameManager._instance.RegisterPlayer(this); //注册当前玩家，在其它脚本中可以通过GameManager获取玩家
         }
     }
 }

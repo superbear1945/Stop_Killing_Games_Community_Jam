@@ -6,32 +6,32 @@ using UnityEngine.InputSystem;
 
 public class Shoot : MonoBehaviour
 {
-    [Header("ç”©æ†å‚æ•°")]
-    public float castForce = 10f;      // ç”©æ†åŠ›åº¦
-    public float shootDelay = 0.5f;//ç”©æ†åŠ¨ä½œå»¶è¿Ÿï¼ˆsï¼‰
-    public GameObject _bait;//é±¼é¥µé¢„åˆ¶ä½“
-    private bool isShooting = false;//æ˜¯å¦å¼€å§‹é’“é±¼äº†
+    [Header("Ë¦¸Ë²ÎÊı")]
+    public float castForce = 10f;      // Ë¦¸ËÁ¦¶È
+    public float shootDelay = 0.5f;//Ë¦¸Ë¶¯×÷ÑÓ³Ù£¨s£©
+    public GameObject _bait;//Óã¶üÔ¤ÖÆÌå
+    private bool isShooting = false;//ÊÇ·ñ¿ªÊ¼µöÓãÁË
 
     PlayerInput _playerInput;
     InputAction _shootAction;
 
     void Awake()
     {
-        // è·å– PlayerInput ç»„ä»¶
+        // »ñÈ¡ PlayerInput ×é¼ş
         _playerInput = GetComponent<PlayerInput>();
         if (_playerInput == null)
         {
-            Debug.LogError("æœªå‘ç°PlayerInputç»„ä»¶");
+            Debug.LogError("Î´·¢ÏÖPlayerInput×é¼ş");
         }
 
-        //è·å–ç”©æ†Action
+        //»ñÈ¡Ë¦¸ËAction
         _shootAction = _playerInput.actions["Shoot"];
         if (_shootAction == null)
         {
-            Debug.LogError("æœªå‘ç°Shoot Action");
+            Debug.LogError("Î´·¢ÏÖShoot Action");
         }
 
-        //ç»‘å®šç”©æ†äº‹ä»¶
+        //°ó¶¨Ë¦¸ËÊÂ¼ş
         _shootAction.performed += StartShoot;
     }
 
@@ -42,14 +42,14 @@ public class Shoot : MonoBehaviour
 
     void StartShoot(InputAction.CallbackContext context)
     {
-        if (isShooting) //é˜²æ­¢ä¸åœç”©æ†é¬¼ç•œ
+        if (isShooting) //·ÀÖ¹²»Í£Ë¦¸Ë¹íĞó
             return;
     
         isShooting = true;
-        Debug.Log("å¼€å§‹ç”©æ†ï¼");
-        //ç”©æ†åŠ¨ä½œ
+        Debug.Log("¿ªÊ¼Ë¦¸Ë£¡");
+        //Ë¦¸Ë¶¯×÷
         //GetComponent<Animator>().SetTrigger("Cast");
-        //ç”Ÿæˆé±¼é¥µ
+        //Éú³ÉÓã¶ü
         Invoke("SpawnBait", shootDelay);
     }
 
@@ -57,17 +57,17 @@ public class Shoot : MonoBehaviour
     {
         if (_bait != null)
         {
-            //ç”Ÿæˆé±¼é¥µ
-            Vector2 spawnPos = transform.position + transform.right * 1f;//å‘è§’è‰²çš„å³è¾¹ç”©æ†
-            // å®ä¾‹åŒ–é±¼é¥µ
+            //Éú³ÉÓã¶ü
+            Vector2 spawnPos = transform.position + transform.right * 1f;//Ïò½ÇÉ«µÄÓÒ±ßË¦¸Ë
+            // ÊµÀı»¯Óã¶ü
             GameObject baitInstance = Instantiate(_bait, spawnPos, Quaternion.identity);
-             // æ·»åŠ  2D ç‰©ç†åŠ›
+             // Ìí¼Ó 2D ÎïÀíÁ¦
             Rigidbody2D baitRb = baitInstance.GetComponent<Rigidbody2D>();
             if (baitRb != null)
             {
-                baitRb.AddForce(Vector2.right * castForce, ForceMode2D.Impulse); // å‘å³æ–½åŠ›
+                baitRb.AddForce(Vector2.right * castForce, ForceMode2D.Impulse); // ÏòÓÒÊ©Á¦
             }
         }
-        isShooting = false; //é‡ç½®ç”©æ†çŠ¶æ€
+        isShooting = false; //ÖØÖÃË¦¸Ë×´Ì¬
     }
 }
