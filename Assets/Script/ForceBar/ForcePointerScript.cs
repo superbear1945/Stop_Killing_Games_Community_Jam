@@ -12,12 +12,11 @@ public class ForcePointerScript : MonoBehaviour
     public Image forcePointerPos;
     //力气值指针位置
 
-    public float _maxForce;
-    public float _curForce;
-    //力气最大值，当前值
-
-    public float _lerdSpeed = 5;
-    //力气条变化速率
+    [Header("与力量条相关值")]
+    public float _maxForce; //力气最大值
+    public float _curForce; //力气当前值
+    public float _lerdSpeed = 5; //力气条变化速率
+    
 
     // Start is called before the first frame update
     void Start()

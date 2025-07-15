@@ -6,7 +6,9 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager _instance; // 单例实例
     static public Player _currentPlayer; // 当前玩家的引用
-    public bool _isFishBite = false; //用于判断鱼是否咬钩
+
+     //用于判断鱼是否咬钩，因为很多地方可能都会用到这个判断，所以放入GameManager中供全局使用
+    public bool _isFishBite = false;
 
     void Awake()
     {
