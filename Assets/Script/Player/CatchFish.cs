@@ -11,6 +11,7 @@ public enum FishType
     _Smallfish
 }
 
+//Bear: 协程可以理解为一种特殊的函数，它可以暂停执行并在未来某个时刻继续执行，非常适合处理时间延迟或等待事件的逻辑。
 //咬钩检测系统
 public class CatchFish : MonoBehaviour
 {
@@ -93,17 +94,17 @@ public class CatchFish : MonoBehaviour
         // 根据随机数和预设概率判断上钩的鱼的类型
         if (randomValue < 0.05)// 5% 概率是鲨鱼
         {
-            Debug.Log("检测到有鱼咬钩！正在确定鱼的种类...");
+            Debug.Log("检测到有鲨鱼咬钩！");
             return FishType._Shark;
         }
         else if (randomValue < 0.15)// 10% 概率是大鱼
         {
-            Debug.Log("检测到有鱼咬钩！正在确定鱼的种类...");
+            Debug.Log("检测到有大鱼咬钩！");
             return FishType._Bigfish;
         }
         else if (randomValue < 0.3)// 15% 概率是小鱼
         {
-            Debug.Log("检测到有鱼咬钩！正在确定鱼的种类...");
+            Debug.Log("检测到有小鱼咬钩！");
             return FishType._Smallfish;
         }
         // 如果随机数不满足任何条件，则没有鱼咬钩

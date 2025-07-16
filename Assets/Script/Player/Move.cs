@@ -40,7 +40,7 @@ public class Move : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (GameManager._instance._isFishBite) //如果鱼咬钩了，就不允许移动
+        if (GameManager._instance._isFishing) //如果处于钓鱼状态，就不允许移动
         {
             _rb2d.velocity = Vector2.zero; //停止移动
             return;
