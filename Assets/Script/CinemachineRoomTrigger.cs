@@ -21,7 +21,6 @@ public class CinemachineRoomTrigger : MonoBehaviour
         {
             //玩家进入区域时，提升摄像机优先级
             _virtualCamera.Priority = _activePriority;
-            Debug.Log(collision.name + " 进入了触发器区域，激活摄像机");
         }
     }
 
@@ -31,7 +30,6 @@ public class CinemachineRoomTrigger : MonoBehaviour
         {
             //玩家离开区域时，降低摄像机优先级
             _virtualCamera.Priority = _inactivePriority;
-            Debug.Log(collision.name + " 离开了触发器区域，停用摄像机");
         }
     }
 
