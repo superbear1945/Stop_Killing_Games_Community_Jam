@@ -1,93 +1,113 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
-namespace FishingGame
+
+//鱼的类型枚举
+public enum FishType
 {
-    //鱼的类型枚举
-    public enum FishType {
-        _None,
-        _Shark,
-        _Bigfish,
-        _Smallfish
-    }
-    
-    //咬钩事件参数
-    public class FishBitingEventArgs : EventArgs
-    {
-        public FishType FishType { get; set; }
-    }
-    
-    //咬钩检测系统
-    public class BitingDetectionSystem
-    {
-        private readonly System.Random random = new System.Random();
-        private CancellationTokenSource cancellationTokenSource;
-        //咬钩事件
-        public event EventHandler<FishBitingEventArgs> FishBiting;
-        //开始检测咬钩
-        public void StartDetection()
-        {
-            Console.WriteLine("甩杆动作完成，准备开始检测咬钩...");
-            //wait 1s
-            Thread.Sleep(1000);
-            Console.WriteLine("开始检测咬钩...");
+    _None,
+    _Shark,
+    _Bigfish,
+    _Smallfish
+}
 
-            cancellationTokenSource = new CancellationTokenSource();
+//咬钩检测系统
+public class CatchFish : MonoBehaviour
+{
+    public static CatchFish Instance { get; private set; } // 单例模式，方便全局访问
 
-            //使用线程池执行定时检测任务
-            ThreadPool.QueueUserWorkItem(_ => PerformDetection(cancellationTokenSource.Token));
-        }
-        //stop detection
-        public void StopDetection()
+    private Coroutine _detectionCoroutine; // 用于存储检测协程的引用，方便停止
+
+    //咬钩事件，使用Action<FishType>委托，当有鱼咬钩时触发
+    public event Action<FishType> OnFishBiting;
+
+    private void Awake()
+    {
+        // 实现单例模式
+        if (Instance == null)
         {
-            cancellationTokenSource?.Cancel();
-            Console.WriteLine("停止咬钩检测");
+            Instance = this;
+            DontDestroyOnLoad(gameObject); // 保证在场景切换时不被销毁
         }
-        //begin detection
-        private void PerformDetection(CancellationToken cancellationToken)
+        else
         {
-            while (!cancellationToken.IsCancellationRequested)
+            Destroy(gameObject); // 如果已存在实例，则销毁当前对象
+        }
+    }
+
+    //开始检测咬钩
+    public void StartDetection()
+    {
+        Debug.Log("甩杆动作完成，准备开始检测咬钩...");
+        // 如果已有检测协程在运行，先停止它
+        if (_detectionCoroutine != null)
+        {
+            StopCoroutine(_detectionCoroutine);
+        }
+        // 启动新的检测协程
+        _detectionCoroutine = StartCoroutine(PerformDetection());
+    }
+
+    //停止检测
+    public void StopDetection()
+    {
+        // 如果检测协程正在运行，则停止它
+        if (_detectionCoroutine != null)
+        {
+            StopCoroutine(_detectionCoroutine);
+            _detectionCoroutine = null; // 清空引用
+            Debug.Log("停止咬钩检测");
+        }
+    }
+
+    //开始检测（协程）
+    private IEnumerator PerformDetection()
+    {
+        // 等待1秒，模拟鱼饵落水后到开始有鱼的时间
+        yield return new WaitForSeconds(1f); // 模拟准备时间
+        Debug.Log("开始检测咬钩...");
+
+        // 无限循环，直到有鱼上钩
+        while (true)
+        {
+            // 每0.2秒检测一次
+            yield return new WaitForSeconds(0.2f);
+            //进行咬钩判定
+            var result = DetermineFishBiting();
+            // 如果判定有鱼咬钩（不是_None类型）
+            if (result != FishType._None)
             {
-                //one detect/0.2s
-                Thread.Sleep(200);
-                //进行咬钩判定
-                var result = DetermineFishBiting();
-                if (result != FishType._None)
-                {
-                    //触发咬钩事件
-                    OnFishBiting(new FishBitingEventArgs { FishType = result });
-                    break;
-                }
+                GameManager._instance._isFishBite = true; //设置鱼咬钩状态，通知游戏进入搏鱼阶段
+                //触发咬钩事件，并传递鱼的类型
+                OnFishBiting?.Invoke(result);
+                break; // 跳出循环，停止检测
             }
         }
-        //判定是否有鱼咬钩
-        private FishType DetermineFishBiting()
+    }
+
+    //判定是否有鱼咬钩
+    private FishType DetermineFishBiting()
+    {
+        // 生成一个0到1之间的随机浮点数
+        float randomValue = UnityEngine.Random.value;
+        // 根据随机数和预设概率判断上钩的鱼的类型
+        if (randomValue < 0.05)// 5% 概率是鲨鱼
         {
-            double randomValue = random.NextDouble();
-            if (randomValue < 0.05)//0.05 shark
-            {
-                Console.WriteLine("检测到有鱼咬钩！正在确定鱼的种类...");
-                return FishType._Shark;
-            }
-            else if (randomValue < 0.15)//0.1 bigfish
-            {
-                Console.WriteLine("检测到有鱼咬钩！正在确定鱼的种类...");
-                return FishType._Bigfish;
-            }
-            else if (randomValue < 0.3)//0.15 small fish
-            {
-                Console.WriteLine("检测到有鱼咬钩！正在确定鱼的种类...");
-                return FishType._Smallfish;
-            }
-            Console.WriteLine("本次检测没有鱼咬钩");
-            return FishType._None;
+            Debug.Log("检测到有鱼咬钩！正在确定鱼的种类...");
+            return FishType._Shark;
         }
-        // 触发咬钩事件的方法
-        protected virtual void OnFishBiting(FishBitingEventArgs e)
+        else if (randomValue < 0.15)// 10% 概率是大鱼
         {
-            FishBiting?.Invoke(this, e);
+            Debug.Log("检测到有鱼咬钩！正在确定鱼的种类...");
+            return FishType._Bigfish;
         }
+        else if (randomValue < 0.3)// 15% 概率是小鱼
+        {
+            Debug.Log("检测到有鱼咬钩！正在确定鱼的种类...");
+            return FishType._Smallfish;
+        }
+        // 如果随机数不满足任何条件，则没有鱼咬钩
+        Debug.Log("本次检测没有鱼咬钩");
+        return FishType._None;
     }
 }

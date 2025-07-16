@@ -56,13 +56,14 @@ public class Shoot : MonoBehaviour
     {
         if (_bait != null)
         {
-            GameManager._instance._isFishBite = true; //设置鱼咬钩状态
+            // GameManager._instance._isFishBite = true; //设置鱼咬钩状态 // Bear: 这行逻辑移动到CatchFish脚本中
             Vector3 playerDirection = new Vector3(transform.localScale.x, 0, 0); //获取玩家方向
             //生成鱼饵
             Vector2 spawnPos = transform.position + playerDirection * 1f;//向角色的右边甩杆
             // 实例化鱼饵
             GameObject baitInstance = Instantiate(_bait, spawnPos, Quaternion.identity);
             GameManager._instance._currentBait = baitInstance; //记录当前鱼饵
+            CatchFish.Instance.StartDetection(); // 开始咬钩检测
         }
         else
         {
