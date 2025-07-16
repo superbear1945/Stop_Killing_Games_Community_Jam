@@ -9,7 +9,7 @@ public class PressurePanelScript : MonoBehaviour
     private UnityEngine.UI.Image pressurePointer;
     public RectTransform rectTransform;
 
-    public float _lerpSpeed = 0.1f; // ²åÖµËÙ¶È
+    public float _lerpSpeed = 0.1f; // æ’å€¼é€Ÿåº¦
     public float _maxPressure = 100;
     public float _curPressure = 75;
     private float _angle;
@@ -18,13 +18,13 @@ public class PressurePanelScript : MonoBehaviour
         pressurePointer = GetComponent<UnityEngine.UI.Image>();
         if (pressurePointer == null)
         {
-            Debug.LogError("Î´ÕÒµ½Ñ¹Á¦Ö¸Õë×é¼ş£¬ÇëÔÚInspectorÖĞÉèÖÃpressurePointer");
+            Debug.LogError("æœªæ‰¾åˆ°å‹åŠ›æŒ‡é’ˆç»„ä»¶ï¼Œè¯·åœ¨Inspectorä¸­è®¾ç½®pressurePointer");
         }
 
         rectTransform = GetComponent<RectTransform>();
         if(rectTransform == null)
         {
-            Debug.LogError("Î´ÕÒµ½Ñ¹Á¦Ö¸ÕërectTransform×é¼ş");
+            Debug.LogError("æœªæ‰¾åˆ°å‹åŠ›æŒ‡é’ˆrectTransformç»„ä»¶");
         }
     }
 
@@ -36,8 +36,8 @@ public class PressurePanelScript : MonoBehaviour
 
     void PointerRotation()
     {
-        Debug.Log($"µ±Ç°Ñ¹Á¦Öµ: {_curPressure}, ×î´óÑ¹Á¦Öµ: {_maxPressure}");
-        // Ê¹ÓÃMathf.LerpÀ´Æ½»¬¹ı¶É½Ç¶È
+        Debug.Log($"å½“å‰å‹åŠ›å€¼: {_curPressure}, æœ€å¤§å‹åŠ›å€¼: {_maxPressure}");
+        // ä½¿ç”¨Mathf.Lerpæ¥å¹³æ»‘è¿‡æ¸¡è§’åº¦
         if (_maxPressure > 0 && _curPressure > 0 && _curPressure < _maxPressure)
         {
             _angle = Mathf.Lerp(90, -90, _curPressure / _maxPressure);
@@ -47,22 +47,22 @@ public class PressurePanelScript : MonoBehaviour
         {
             if (_curPressure >= _maxPressure)
             {
-                _angle = -90; // ³¬¹ı×î´óÖµÊ±Ö¸Ïò-90¶È
-                _curPressure = _maxPressure; // È·±£Ñ¹Á¦Öµ²»³¬¹ı×î´ó
-                Debug.Log($"Angle={_angle}£¬Ñ¹Á¦Öµ³¬¹ı×î´óÖµ£¬Ö¸ÕëÖ¸Ïò-90¶È");
-            
+                _angle = -90; // è¶…è¿‡æœ€å¤§å€¼æ—¶æŒ‡å‘-90åº¦
+                _curPressure = _maxPressure; // ç¡®ä¿å‹åŠ›å€¼ä¸è¶…è¿‡æœ€å¤§
+                Debug.Log($"Angle={_angle}ï¼Œå‹åŠ›å€¼è¶…è¿‡æœ€å¤§å€¼ï¼ŒæŒ‡é’ˆæŒ‡å‘-90åº¦");
+
             }
-                
-            else if(_curPressure <= 0)
+
+            else if (_curPressure <= 0)
             {
-                _angle = 90; // Ğ¡ÓÚµÈÓÚ0Ê±Ö¸Ïò90¶È
-                _curPressure = 0; // È·±£Ñ¹Á¦Öµ²»Ğ¡ÓÚ0
-                Debug.Log($"Angle={_angle}£¬Ñ¹Á¦ÖµÎª0»ò¸ºÊı£¬Ö¸ÕëÖ¸Ïò90¶È");
+                _angle = 90; // å°äºç­‰äº0æ—¶æŒ‡å‘90åº¦
+                _curPressure = 0; // ç¡®ä¿å‹åŠ›å€¼ä¸å°äº0
+                Debug.Log($"Angle={_angle}ï¼Œå‹åŠ›å€¼ä¸º0æˆ–è´Ÿæ•°ï¼ŒæŒ‡é’ˆæŒ‡å‘90åº¦");
             }
-                
+
         }
-        
-        //Ğı×ªÑ¹Á¦±íÖ¸Õë
+
+        //æ—‹è½¬å‹åŠ›è¡¨æŒ‡é’ˆ
         rectTransform.rotation = Quaternion.Euler(0, 0, _angle);
     }
 }
