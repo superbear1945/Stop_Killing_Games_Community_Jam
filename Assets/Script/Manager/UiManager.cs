@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public static UIManager _instance;
     //Bear：在UIManager中，尽量使用Inspector拖拽的方式为属性赋值，比如下面的ForcePointerScript属性
     [SerializeField] ForcePointerScript _forcePointerScript; //通过在Inspector中拖拽的方式获取力量表指针
+    [SerializeField] PressurePanelScript _pressurePanelScript; //通过在Inspector中拖拽的方式获取压力表指针
     private void Awake()
     {
         if (_instance == null)
@@ -27,6 +28,8 @@ public class UIManager : MonoBehaviour
     {
         if(_forcePointerScript == null)
             Debug.LogError("ForcePointerScript is not assigned in UIManager!");
+        if(_pressurePanelScript == null)
+            Debug.LogError("PressurePanelScript is not assigned in UIManager!");
     }
 
 
@@ -58,6 +61,31 @@ public class UIManager : MonoBehaviour
         
     }
 
+    //控制压力变化相关
+    // 为UI中的压力值提供数值的接口
+    public void SetPressure(float curPressure = 75,float maxPressure = 100)
+    {
+        _pressurePanelScript._curPressure = curPressure;
+        _pressurePanelScript._maxPressure = maxPressure;
+    }
+
+
+    public void AddPressure()
+    {
+        if (_pressurePanelScript._curPressure < _pressurePanelScript._maxPressure)
+        {
+            _pressurePanelScript._curPressure += _pressurePanelScript._lerpSpeed * Time.deltaTime;
+        }
+
+    }
+
+    public void ReducePressure()
+    {
+        if(_pressurePanelScript._curPressure > 0)
+        {
+            _pressurePanelScript._curPressure -= _pressurePanelScript._lerpSpeed * Time.deltaTime;
+        }
+    }
     void GameQuit()
     {
         Application.Quit();
