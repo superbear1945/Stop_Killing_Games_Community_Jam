@@ -22,6 +22,14 @@ public class CatchFish : MonoBehaviour
     //咬钩事件，使用Action<FishType>委托，当有鱼咬钩时触发
     public event Action<FishType> OnFishBiting;
 
+    [Header("鱼类预制体")]
+    public GameObject sharkPrefab; // 鲨鱼预制体
+    public GameObject bigfishPrefab; // 大鱼预制体
+    public GameObject smallfishPrefab; // 小鱼预制体
+
+    [Header("生成设置")]
+    public float spawnDistance = 5f; // 鱼与角色的距离
+
     private void Awake()
     {
         // 实现单例模式
@@ -110,5 +118,63 @@ public class CatchFish : MonoBehaviour
         // 如果随机数不满足任何条件，则没有鱼咬钩
         Debug.Log("本次检测没有鱼咬钩");
         return FishType._None;
+    }
+
+    void SpawnFish(FishType fishType)
+    {
+        // 检查当前玩家是否存在
+        if (GameManager._currentPlayer == null)
+        {
+            Debug.LogError("当前玩家不存在，无法生成鱼");
+            return;
+        }
+
+        // 根据鱼的类型选择对应的预制体
+        GameObject fishPrefab = null;
+        switch (fishType)
+        {
+            case FishType._Shark:
+                fishPrefab = sharkPrefab;
+                break;
+            case FishType._Bigfish:
+                fishPrefab = bigfishPrefab;
+                break;
+            case FishType._Smallfish:
+                fishPrefab = smallfishPrefab;
+                break;
+            case FishType._None:
+                Debug.LogWarning("尝试生成类型为None的鱼");
+                return;
+            default:
+                Debug.LogError("未知的鱼类型：" + fishType);
+                return;
+        }
+
+        // 检查预制体是否存在
+        if (fishPrefab == null)
+        {
+            Debug.LogError($"未设置{fishType}类型的鱼预制体");
+            return;
+        }
+
+        // 计算生成位置：根据角色朝向在玩家前方生成
+        Vector3 spawnPosition = CalculateSpawnPosition();
+
+        // 生成鱼
+        GameObject fish = Instantiate(fishPrefab, spawnPosition, Quaternion.identity);
+        Debug.Log($"在位置 {spawnPosition} 生成了 {fishType} 类型的鱼");
+    }
+
+    // 计算鱼的生成位置（在玩家前方）
+    private Vector3 CalculateSpawnPosition()
+    {
+        // 获取玩家当前朝向（通过localScale判断）
+        Transform playerTransform = GameManager._currentPlayer.transform;
+        float direction = playerTransform.localScale.x > 0 ? 1f : -1f;
+        
+        // 在玩家前方指定距离处生成鱼
+        Vector3 spawnPosition = playerTransform.position + new Vector3(direction * spawnDistance, 0, 0);
+        
+        return spawnPosition;
     }
 }

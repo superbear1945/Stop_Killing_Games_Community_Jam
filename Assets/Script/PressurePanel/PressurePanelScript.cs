@@ -36,7 +36,6 @@ public class PressurePanelScript : MonoBehaviour
 
     void PointerRotation()
     {
-        Debug.Log($"当前压力值: {_curPressure}, 最大压力值: {_maxPressure}");
         // 使用Mathf.Lerp来平滑过渡角度
         if (_maxPressure > 0 && _curPressure > 0 && _curPressure < _maxPressure)
         {
