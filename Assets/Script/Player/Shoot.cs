@@ -59,7 +59,7 @@ public class Shoot : MonoBehaviour
         Vector2 spawnPos = transform.position + playerDirection * 1f;//向角色的右边甩杆
         // 实例化鱼饵
         CatchFish.Instance.StartDetection(); // 开始咬钩检测
-        
+
         _isShooting = false; //重置甩杆状态
     }
 }

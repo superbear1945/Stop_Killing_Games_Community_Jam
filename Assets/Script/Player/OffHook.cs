@@ -4,6 +4,16 @@ using UnityEngine;
 
 public class OffHook : MonoBehaviour
 {
+    void Start()
+    {
+        CatchFish.Instance.OnOffHook += OnOffHook;
+    }
+
+    void OnDisable()
+    {
+        CatchFish.Instance.OnOffHook -= OnOffHook;
+    }
+
     public void OnOffHook()
     {
         CatchFish.Instance.StopDetection(); //停止咬钩检测

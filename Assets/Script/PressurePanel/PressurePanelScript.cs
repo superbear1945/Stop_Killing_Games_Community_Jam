@@ -48,7 +48,6 @@ public class PressurePanelScript : MonoBehaviour
             {
                 _angle = -90; // 超过最大值时指向-90度
                 _curPressure = _maxPressure; // 确保压力值不超过最大
-                Debug.Log($"Angle={_angle}，压力值超过最大值，指针指向-90度");
 
             }
 
@@ -56,7 +55,6 @@ public class PressurePanelScript : MonoBehaviour
             {
                 _angle = 90; // 小于等于0时指向90度
                 _curPressure = 0; // 确保压力值不小于0
-                Debug.Log($"Angle={_angle}，压力值为0或负数，指针指向90度");
             }
 
         }

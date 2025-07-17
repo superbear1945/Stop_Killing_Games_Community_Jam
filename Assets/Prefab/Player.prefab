@@ -165,7 +165,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   castForce: 10
   shootDelay: 0.5
-  _bait: {fileID: 6661358711788303047, guid: 24fbd2f0caa148747831bb174c0f3d2e, type: 3}
 --- !u!114 &7678173583311437821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,6 +225,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 521c7c89f2a12cb479df12ac3a3e2c20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sharkPrefab: {fileID: 6661358711788303047, guid: 24fbd2f0caa148747831bb174c0f3d2e, type: 3}
+  bigfishPrefab: {fileID: 6661358711788303047, guid: 114b077f2cd9be347a7d13266a5ae0a0, type: 3}
+  smallfishPrefab: {fileID: 6661358711788303047, guid: ed61f23f12f6aaf47adb532c9cd4524a, type: 3}
+  spawnDistance: 3
 --- !u!50 &5229291420477327624
 Rigidbody2D:
   serializedVersion: 4

@@ -22,6 +22,9 @@ public class CatchFish : MonoBehaviour
     //咬钩事件，使用Action<FishType>委托，当有鱼咬钩时触发
     public event Action<FishType> OnFishBiting;
 
+    //未咬钩事件
+    public event Action OnOffHook;
+
     [Header("鱼类预制体")]
     public GameObject sharkPrefab; // 鲨鱼预制体
     public GameObject bigfishPrefab; // 大鱼预制体
@@ -65,7 +68,6 @@ public class CatchFish : MonoBehaviour
         {
             StopCoroutine(_detectionCoroutine);
             _detectionCoroutine = null; // 清空引用
-            Debug.Log("停止咬钩检测");
         }
     }
 
@@ -76,21 +78,20 @@ public class CatchFish : MonoBehaviour
         yield return new WaitForSeconds(1f); // 模拟准备时间
         Debug.Log("开始检测咬钩...");
 
-        // 无限循环，直到有鱼上钩
-        while (true)
+        //进行咬钩判定
+        var result = DetermineFishBiting();
+        // 如果判定有鱼咬钩（不是_None类型）
+        if (result != FishType._None)
         {
-            // 每0.2秒检测一次
-            yield return new WaitForSeconds(0.2f);
-            //进行咬钩判定
-            var result = DetermineFishBiting();
-            // 如果判定有鱼咬钩（不是_None类型）
-            if (result != FishType._None)
-            {
-                GameManager._instance._isFishBite = true; //设置鱼咬钩状态，通知游戏进入搏鱼阶段
-                //触发咬钩事件，并传递鱼的类型
-                OnFishBiting?.Invoke(result);
-                break; // 跳出循环，停止检测
-            }
+            GameManager._instance._isFishBite = true; //设置鱼咬钩状态，通知游戏进入搏鱼阶段
+            SpawnFish(result); //生成鱼
+            //触发咬钩事件，并传递鱼的类型
+            OnFishBiting?.Invoke(result);
+        }
+        else //如果没有鱼咬钩
+        {
+            StopDetection(); //停止检测
+            OnOffHook?.Invoke(); //调用脱钩事件
         }
     }
 
@@ -171,10 +172,17 @@ public class CatchFish : MonoBehaviour
         // 获取玩家当前朝向（通过localScale判断）
         Transform playerTransform = GameManager._currentPlayer.transform;
         float direction = playerTransform.localScale.x > 0 ? 1f : -1f;
+
+        // 获取玩家的Collider2D组件
+        Collider2D playerCollider = playerTransform.GetComponent<Collider2D>();
         
-        // 在玩家前方指定距离处生成鱼
-        Vector3 spawnPosition = playerTransform.position + new Vector3(direction * spawnDistance, 0, 0);
-        
+        // 计算玩家底部位置
+        Vector3 basePosition = playerTransform.position;
+        basePosition.y -= playerCollider.bounds.extents.y;
+
+        // 在玩家底部前方指定距离处生成鱼
+        Vector3 spawnPosition = basePosition + new Vector3(direction * spawnDistance, 0, 0);
+
         return spawnPosition;
     }
 }
