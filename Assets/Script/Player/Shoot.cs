@@ -47,7 +47,7 @@ public class Shoot : MonoBehaviour
         Debug.Log("开始甩杆！");
         //甩杆动作
         GetComponent<Animator>().SetTrigger("Shoot");
-        //生成鱼饵
+        //生成鱼
         SpawnBait();
     }
 

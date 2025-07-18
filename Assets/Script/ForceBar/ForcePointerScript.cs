@@ -41,11 +41,8 @@ public class ForcePointerScript : MonoBehaviour
 
     void ChangePos()
     {
-        if(GameManager._instance._isFishing == false) //如果不处于钓鱼状态，就不需要更新力气指示条
-        {
+        if(GameManager._instance._isFishBite == false) //如果不处于鱼咬钩状态，就不需要更新力气指示条，力气指示条恒为百分之75
             _curForce = 75; //重置当前力气值
-            return;
-        }
         forcePointerPos.fillAmount = Mathf.Lerp(a: forcePointerPos.fillAmount, b: _curForce / _maxForce, t: _lerdSpeed * Time.deltaTime);
     }
 
