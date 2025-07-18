@@ -48,18 +48,15 @@ public class Shoot : MonoBehaviour
         //甩杆动作
         GetComponent<Animator>().SetTrigger("Shoot");
         //生成鱼饵
-        Invoke("SpawnBait", shootDelay);
+        SpawnBait();
     }
 
     void SpawnBait()
     {
         GameManager._instance._isFishing = true; //设置玩家正在钓鱼
         Vector3 playerDirection = new Vector3(transform.localScale.x, 0, 0); //获取玩家方向
-        //生成鱼饵
         Vector2 spawnPos = transform.position + playerDirection * 1f;//向角色的右边甩杆
-        // 实例化鱼饵
         CatchFish.Instance.StartDetection(); // 开始咬钩检测
-
         _isShooting = false; //重置甩杆状态
     }
 }

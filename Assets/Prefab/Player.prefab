@@ -228,7 +228,7 @@ MonoBehaviour:
   sharkPrefab: {fileID: 6661358711788303047, guid: 24fbd2f0caa148747831bb174c0f3d2e, type: 3}
   bigfishPrefab: {fileID: 6661358711788303047, guid: 114b077f2cd9be347a7d13266a5ae0a0, type: 3}
   smallfishPrefab: {fileID: 6661358711788303047, guid: ed61f23f12f6aaf47adb532c9cd4524a, type: 3}
-  spawnDistance: 3
+  spawnDistance: 1
 --- !u!50 &5229291420477327624
 Rigidbody2D:
   serializedVersion: 4
