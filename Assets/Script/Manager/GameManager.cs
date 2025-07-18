@@ -4,6 +4,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    //鱼的类型枚举
+    public enum FishType
+    {
+        _None,
+        _Shark,
+        _Bigfish,
+        _Smallfish
+    }
+
     static public GameManager _instance; // 单例实例
     static public Player _currentPlayer; // 当前玩家的引用
 

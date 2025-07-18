@@ -2,15 +2,6 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-//鱼的类型枚举
-public enum FishType
-{
-    _None,
-    _Shark,
-    _Bigfish,
-    _Smallfish
-}
-
 //Bear: 协程可以理解为一种特殊的函数，它可以暂停执行并在未来某个时刻继续执行，非常适合处理时间延迟或等待事件的逻辑。
 //咬钩检测系统
 public class CatchFish : MonoBehaviour
@@ -20,7 +11,7 @@ public class CatchFish : MonoBehaviour
     private Coroutine _detectionCoroutine; // 用于存储检测协程的引用，方便停止
 
     //咬钩事件，使用Action<FishType>委托，当有鱼咬钩时触发
-    public event Action<FishType> OnFishBiting;
+    public event Action<GameManager.FishType> OnFishBiting;
 
     //未咬钩事件
     public event Action OnOffHook;
@@ -81,7 +72,7 @@ public class CatchFish : MonoBehaviour
         //进行咬钩判定
         var result = DetermineFishBiting();
         // 如果判定有鱼咬钩（不是_None类型）
-        if (result != FishType._None)
+        if (result != GameManager.FishType._None)
         {
             GameManager._instance._isFishBite = true; //设置鱼咬钩状态，通知游戏进入搏鱼阶段
             SpawnFish(result); //生成鱼
@@ -96,7 +87,7 @@ public class CatchFish : MonoBehaviour
     }
 
     //判定是否有鱼咬钩
-    private FishType DetermineFishBiting()
+    private GameManager.FishType DetermineFishBiting()
     {
         // 生成一个0到1之间的随机浮点数
         float randomValue = UnityEngine.Random.value;
@@ -105,24 +96,24 @@ public class CatchFish : MonoBehaviour
         if (randomValue < 0.05)// 5% 概率是鲨鱼
         {
             Debug.Log("检测到有鲨鱼咬钩！");
-            return FishType._Shark;
+            return GameManager.FishType._Shark;
         }
         else if (randomValue < 0.15)// 10% 概率是大鱼
         {
             Debug.Log("检测到有大鱼咬钩！");
-            return FishType._Bigfish;
+            return GameManager.FishType._Bigfish;
         }
         else if (randomValue < 0.3)// 15% 概率是小鱼
         {
             Debug.Log("检测到有小鱼咬钩！");
-            return FishType._Smallfish;
+            return GameManager.FishType._Smallfish;
         }
         // 如果随机数不满足任何条件，则没有鱼咬钩
         Debug.Log("本次检测没有鱼咬钩");
-        return FishType._None;
+        return GameManager.FishType._None;
     }
 
-    void SpawnFish(FishType fishType)
+    void SpawnFish(GameManager.FishType fishType)
     {
         // 检查当前玩家是否存在
         if (GameManager._currentPlayer == null)
@@ -135,16 +126,16 @@ public class CatchFish : MonoBehaviour
         GameObject fishPrefab = null;
         switch (fishType)
         {
-            case FishType._Shark:
+            case GameManager.FishType._Shark:
                 fishPrefab = sharkPrefab;
                 break;
-            case FishType._Bigfish:
+            case GameManager.FishType._Bigfish:
                 fishPrefab = bigfishPrefab;
                 break;
-            case FishType._Smallfish:
+            case GameManager.FishType._Smallfish:
                 fishPrefab = smallfishPrefab;
                 break;
-            case FishType._None:
+            case GameManager.FishType._None:
                 Debug.LogWarning("尝试生成类型为None的鱼");
                 return;
             default:
