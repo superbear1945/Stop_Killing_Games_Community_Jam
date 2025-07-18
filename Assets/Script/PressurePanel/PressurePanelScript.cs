@@ -28,6 +28,30 @@ public class PressurePanelScript : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        // 确保GameManager实例存在后再订阅事件
+        if (GameManager._instance != null)
+        {
+            GameManager._instance.OnPressureChange += UpdatePressure;
+        }
+    }
+
+    void OnDestroy()
+    {
+        // 在对象销毁时取消订阅，防止内存泄漏
+        if (GameManager._instance != null)
+        {
+            GameManager._instance.OnPressureChange -= UpdatePressure;
+        }
+    }
+
+    // 更新压力值
+    void UpdatePressure(float amount)
+    {
+        _curPressure += amount;
+    }
+
     // Update is called once per frame
     void Update()
     {

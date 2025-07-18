@@ -155,6 +155,19 @@ public class CatchFish : MonoBehaviour
 
         // 生成鱼
         GameObject fish = Instantiate(fishPrefab, spawnPosition, Quaternion.identity);
+        GameManager._instance._currentFightingFishType = fishType; // 更新当前搏斗的鱼的类型
+
+        // 设置鱼的类型
+        FishRandomPressure fishPressure = fish.GetComponent<FishRandomPressure>();
+        if (fishPressure != null)
+        {
+            fishPressure.fishType = fishType;
+        }
+        else
+        {
+            Debug.LogWarning($"在生成的鱼上没有找到 {nameof(FishRandomPressure)} 组件");
+        }
+
         Debug.Log($"在位置 {spawnPosition} 生成了 {fishType} 类型的鱼");
     }
 
