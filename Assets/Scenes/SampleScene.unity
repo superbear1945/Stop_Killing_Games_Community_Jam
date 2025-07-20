@@ -1744,7 +1744,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26e5fa2428666f2488608fc1728f0579, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _isFishBite: 1
+  _currentFightingFishType: 0
+  _isFishBite: 0
   _isFishing: 0
   _currentBait: {fileID: 0}
 --- !u!4 &1271473088

@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
 
 
     //Bear: 用于在钓鱼动作结束后重置力量值
-    public void ResetForce(float curForce = 75, float maxForce = 100)
+    public void ResetForce(float curForce = 50, float maxForce = 100)
     {
         _forcePointerScript._curForce = curForce;
         _forcePointerScript._maxForce = maxForce;
