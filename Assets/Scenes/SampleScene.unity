@@ -362,7 +362,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1883,7 +1883,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 1
   m_UseSpriteMesh: 0
@@ -2908,7 +2908,7 @@ MonoBehaviour:
   forcePointerPosRed: {fileID: 1302754933}
   _maxForce: 0
   _curForce: 0
-  _lerdSpeed: 5
+  _lerdSpeed: 10
 --- !u!1 &2040327848
 GameObject:
   m_ObjectHideFlags: 0
