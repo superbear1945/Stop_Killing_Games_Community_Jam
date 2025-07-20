@@ -64,7 +64,7 @@ public class PressurePanelScript : MonoBehaviour
         if (_maxPressure > 0 && _curPressure > 0 && _curPressure < _maxPressure)
         {
             _angle = Mathf.Lerp(90, -90, _curPressure / _maxPressure);
-            Debug.Log($"Angle={_angle}");
+
         }
         else
         {

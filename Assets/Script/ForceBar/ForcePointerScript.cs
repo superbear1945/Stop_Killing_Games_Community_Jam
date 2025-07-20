@@ -9,8 +9,12 @@ using UnityEngine.UI;
 
 public class ForcePointerScript : MonoBehaviour
 {
-    public Image forcePointerPos;
-    //力气值指针位置
+
+    public GameObject forcePointerPosAdd;
+    //力气值指针位置（增加）
+
+    public GameObject forcePointerPosRed;
+    //力气值指针位置 (减少)
 
     [Header("与力量条相关值")]
     public float _maxForce; //力气最大值
@@ -21,10 +25,16 @@ public class ForcePointerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        forcePointerPos = GetComponent<Image>();
-        if (forcePointerPos == null)
+        forcePointerPosAdd = transform.Find("Add").gameObject;
+        forcePointerPosRed = transform.Find("Reduce").gameObject;
+
+        if (forcePointerPosAdd == null)
         {
-            Debug.LogError("ForcePointer component is missing from forcePointer component!");
+            Debug.LogError("增长力量条图片未获取");
+        }
+        if (forcePointerPosRed == null)
+        {
+            Debug.LogError("减少力量条图片未获取");
         }
 
         //初始化力气指示条位置
@@ -42,8 +52,25 @@ public class ForcePointerScript : MonoBehaviour
     void ChangePos()
     {
         if(GameManager._instance._isFishBite == false) //如果不处于鱼咬钩状态，就不需要更新力气指示条，力气指示条恒为百分之75
-            _curForce = 75; //重置当前力气值
-        forcePointerPos.fillAmount = Mathf.Lerp(a: forcePointerPos.fillAmount, b: _curForce / _maxForce, t: _lerdSpeed * Time.deltaTime);
+            _curForce = 50; //重置当前力气值
+
+        if(_curForce > _maxForce / 2)
+        {
+            //如果当前力气值大于最大力气值的一半，则显示增加力量条指针，否则显示减少力量条指针
+            forcePointerPosRed.gameObject.SetActive(false);
+            forcePointerPosAdd.gameObject.SetActive(true);
+            forcePointerPosAdd.GetComponent<Image>().fillAmount = Mathf.Lerp(a: forcePointerPosAdd.GetComponent<Image>().fillAmount, b: ( _curForce - _maxForce / 2 ) / ( _maxForce / 2), t: _lerdSpeed * Time.deltaTime);
+            
+        }
+        else
+        {
+            //如果当前力气值小于等于最大力气值的一半，则显示减少力量条指针，否则显示增加力量条指针
+            forcePointerPosRed.gameObject.SetActive(true);
+            forcePointerPosAdd.gameObject.SetActive(false);
+            forcePointerPosRed.GetComponent<Image>().fillAmount = Mathf.Lerp(a: forcePointerPosRed.GetComponent<Image>().fillAmount, b: ( _maxForce / 2 - _curForce ) / ( _maxForce / 2 ), t: _lerdSpeed * Time.deltaTime);
+            
+        }
+        
     }
 
 }
