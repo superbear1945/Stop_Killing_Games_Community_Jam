@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
     static public Player _currentPlayer; // 当前玩家的引用
 
     public FishType _currentFightingFishType; // 当前正在搏斗的鱼的类型
-    public event Action<float> OnPressureChange; // 压力变化事件
-
      //用于判断鱼是否咬钩，因为很多地方可能都会用到这个判断，所以放入GameManager中供全局使用
     public bool _isFishBite = false;
     public bool _isFishing = false; // 是否正在钓鱼
@@ -46,9 +44,4 @@ public class GameManager : MonoBehaviour
         _currentPlayer = player;
     }
 
-    // 触发压力变化事件
-    public void TriggerPressureChange(float amount)
-    {
-        OnPressureChange?.Invoke(amount);
-    }
 }

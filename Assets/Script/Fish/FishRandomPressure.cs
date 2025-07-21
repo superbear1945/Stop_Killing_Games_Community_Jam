@@ -42,10 +42,10 @@ public class FishRandomPressure : MonoBehaviour
             // 在(-_range, _range)之间生成一个随机值
             float pressureChange = Random.Range(-_range, _range);
 
-            // 通过GameManager触发压力变化事件
-            if (GameManager._instance != null)
+            // 通过UIManager触发压力变化事件
+            if (UIManager._instance != null)
             {
-                GameManager._instance.TriggerPressureChange(pressureChange);
+                UIManager._instance.TriggerPressureChange(pressureChange);
             }
         }
     }
