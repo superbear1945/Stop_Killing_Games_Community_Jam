@@ -5,7 +5,7 @@ using UnityEngine;
 public class FishRandomPressure : MonoBehaviour
 {
     public GameManager.FishType fishType; // 鱼的类型
-    public float updateInterval = 1f; // 更新间隔
+    public float _updateInterval = 1f; // 更新间隔
 
     private float _range; // 压力随机范围
 
@@ -38,7 +38,7 @@ public class FishRandomPressure : MonoBehaviour
         while (true)
         {
             // 等待指定的时间间隔
-            yield return new WaitForSeconds(updateInterval);
+            yield return new WaitForSeconds(_updateInterval);
 
             // 在(-_range, _range)之间生成一个随机值
             float pressureChange = Random.Range(-_range, _range);
