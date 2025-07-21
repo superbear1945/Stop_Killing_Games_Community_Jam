@@ -70,7 +70,6 @@ public class PressurePanelScript : MonoBehaviour
     {
         // Bear: 每一帧都调用PointerRotation来更新指针位置
         PointerRotation();
-        _addPressure = UIManager._instance.GetCurForce() - 50; //获取当前力量值与默认值50的差值
     }
 
     void PointerRotation()
@@ -78,9 +77,13 @@ public class PressurePanelScript : MonoBehaviour
         // Bear: 使用Mathf.Clamp确保当前压力值不会超过设定的最大和最小范围（0到_maxPressure）。
         _curPressure = Mathf.Clamp(_curPressure, 0, _maxPressure);
 
+        _addPressure = UIManager._instance.GetCurForce() - 50; //获取当前力量值与默认值50的差值
+
+        float realPressure = _curPressure + _addPressure; // Bear: 计算实际压力值，包含力量值的影响
+
         // Bear: 这是实现平滑过渡的核心。每一帧，我们都让_displayPressure向_curPressure靠近一点。
         // Bear: _lerpSpeed * Time.deltaTime确保了过渡速度在不同帧率下保持一致。
-        _displayPressure = Mathf.Lerp(_displayPressure, _curPressure, _lerpSpeed * Time.deltaTime);
+        _displayPressure = Mathf.Lerp(_displayPressure, realPressure, _lerpSpeed * Time.deltaTime);
 
         // Bear: 根据平滑过渡后的_displayPressure来计算指针应该旋转的角度。
         // Bear: 罗盘UI上，90度代表0压力，-90度代表最大压力。

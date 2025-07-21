@@ -36,9 +36,11 @@ public class FishRandomPressure : MonoBehaviour
     {
         while (true)
         {
+            _updateInterval = Random.Range(1f, 4f); // 随机更新间隔
+
             // 等待指定的时间间隔
             yield return new WaitForSeconds(_updateInterval);
-
+            
             // 在(-_range, _range)之间生成一个随机值
             float pressureChange = Random.Range(-_range, _range);
 
