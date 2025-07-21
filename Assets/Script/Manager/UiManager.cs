@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
+    public event Action<float> OnPressureChange; // 压力变化事件
     
     public static UIManager _instance;
     //Bear：在UIManager中，尽量使用Inspector拖拽的方式为属性赋值，比如下面的ForcePointerScript属性
@@ -63,10 +65,9 @@ public class UIManager : MonoBehaviour
 
     //控制压力变化相关
     // 为UI中的压力值提供数值的接口
-    public void SetPressure(float curPressure = 75,float maxPressure = 100)
+    public void ResetPressure()
     {
-        _pressurePanelScript._curPressure = curPressure;
-        _pressurePanelScript._maxPressure = maxPressure;
+        _pressurePanelScript.ResetPressure(); // 重置压力值
     }
 
 
@@ -86,6 +87,13 @@ public class UIManager : MonoBehaviour
             _pressurePanelScript._curPressure -= _pressurePanelScript._lerpSpeed * Time.deltaTime;
         }
     }
+
+    // 触发压力变化事件
+    public void TriggerPressureChange(float amount)
+    {
+        OnPressureChange?.Invoke(amount);
+    }
+
     void GameQuit()
     {
         Application.Quit();

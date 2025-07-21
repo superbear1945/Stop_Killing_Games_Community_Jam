@@ -21,5 +21,6 @@ public class OffHook : MonoBehaviour
         GameManager._instance._isFishing = false; //设置玩家钓鱼状态为false
         PlayerAnimController.Instance.SetTrigger("OffHook"); //设置收杆动画触发器
         UIManager._instance.ResetForce(); //重置力量值
+        UIManager._instance.ResetPressure(); //重置压力值
     }
 }
