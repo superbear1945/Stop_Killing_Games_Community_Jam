@@ -21,7 +21,8 @@ public class FishRandomPressure : MonoBehaviour
                 _range = 10f;
                 break;
             case GameManager.FishType._Smallfish:
-                _range = 5f;
+                //_range = 5f;
+                _range = 0f; //测试用
                 break;
             default:
                 _range = 0f;
