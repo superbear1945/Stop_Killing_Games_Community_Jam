@@ -35,6 +35,12 @@ public class UIManager : MonoBehaviour
     }
 
 
+    //实现力量表增减量作用与压力表
+    public float GetCurForce()
+    {
+        return _forcePointerScript._curForce;
+    }
+
     //Bear: 用于在钓鱼动作结束后重置力量值
     public void ResetForce(float curForce = 50, float maxForce = 100)
     {
@@ -71,27 +77,9 @@ public class UIManager : MonoBehaviour
     }
 
 
-    public void AddPressure()
-    {
-        if (_pressurePanelScript._curPressure < _pressurePanelScript._maxPressure)
-        {
-            _pressurePanelScript._curPressure += _pressurePanelScript._lerpSpeed * Time.deltaTime;
-        }
-
-    }
-
-    public void ReducePressure()
-    {
-        if(_pressurePanelScript._curPressure > 0)
-        {
-            _pressurePanelScript._curPressure -= _pressurePanelScript._lerpSpeed * Time.deltaTime;
-        }
-    }
-
     // 触发压力变化事件
     public void TriggerPressureChange(float amount)
     {
-        amount += (_forcePointerScript._curForce - 50); //压力表真正的值为当前压力值加上力量表于默认值的差值
         OnPressureChange?.Invoke(amount);
     }
 

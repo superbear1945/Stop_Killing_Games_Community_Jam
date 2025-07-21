@@ -91,7 +91,7 @@ public class CatchFish : MonoBehaviour
     {
         // 生成一个0到1之间的随机浮点数
         //float randomValue = UnityEngine.Random.value;
-        float randomValue = 0.2f; // 为了测试方便，始终钓小鱼，正式版记得将上一行的随机值取消注释
+        float randomValue = 0.01f; // 为了测试方便，始终钓小鱼，正式版记得将上一行的随机值取消注释
         Debug.Log("随机值：" + randomValue);
         // 根据随机数和预设概率判断上钩的鱼的类型
         if (randomValue < 0.05)// 5% 概率是鲨鱼

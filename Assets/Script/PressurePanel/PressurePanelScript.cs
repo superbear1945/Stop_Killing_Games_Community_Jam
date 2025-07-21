@@ -18,6 +18,9 @@ public class PressurePanelScript : MonoBehaviour
     // Bear: _curPressure 是当前的、真实的压力目标值。这个值会立即变化。
     public float _curPressure = 50;
 
+    //用于增加压力的值，这里用于实现力量值改变压力的效果
+    public float _addPressure = 0; 
+
     // Bear: _displayPressure 是用于UI显示的压力值。它会通过插值计算平滑地趋近_curPressure，从而实现视觉上的平滑过渡效果。
     private float _displayPressure;
     private float _angle;
@@ -67,6 +70,7 @@ public class PressurePanelScript : MonoBehaviour
     {
         // Bear: 每一帧都调用PointerRotation来更新指针位置
         PointerRotation();
+        _addPressure = UIManager._instance.GetCurForce() - 50; //获取当前力量值与默认值50的差值
     }
 
     void PointerRotation()

@@ -20,7 +20,7 @@ public class ForcePointerScript : MonoBehaviour
     public float _maxForce; //力气最大值
     public float _curForce; //力气当前值
     public float _lerdSpeed = 5; //力气条变化速率
-    
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,26 +51,22 @@ public class ForcePointerScript : MonoBehaviour
 
     void ChangePos()
     {
-        if(GameManager._instance._isFishBite == false) //如果不处于鱼咬钩状态，就不需要更新力气指示条，力气指示条恒为百分之75
+        if (GameManager._instance._isFishBite == false) //如果不处于鱼咬钩状态，就不需要更新力气指示条，力气指示条恒为百分之75
             _curForce = 50; //重置当前力气值
 
-        if(_curForce > _maxForce / 2)
+        if (_curForce > _maxForce / 2)
         {
             //如果当前力气值大于最大力气值的一半，则显示增加力量条指针，否则显示减少力量条指针
             forcePointerPosRed.gameObject.SetActive(false);
             forcePointerPosAdd.gameObject.SetActive(true);
-            forcePointerPosAdd.GetComponent<Image>().fillAmount = Mathf.Lerp(a: forcePointerPosAdd.GetComponent<Image>().fillAmount, b: ( _curForce - _maxForce / 2 ) / ( _maxForce / 2), t: _lerdSpeed * Time.deltaTime);
-            
+            forcePointerPosAdd.GetComponent<Image>().fillAmount = Mathf.Lerp(a: forcePointerPosAdd.GetComponent<Image>().fillAmount, b: (_curForce - _maxForce / 2) / (_maxForce / 2), t: _lerdSpeed * Time.deltaTime);
         }
         else
         {
             //如果当前力气值小于等于最大力气值的一半，则显示减少力量条指针，否则显示增加力量条指针
             forcePointerPosRed.gameObject.SetActive(true);
             forcePointerPosAdd.gameObject.SetActive(false);
-            forcePointerPosRed.GetComponent<Image>().fillAmount = Mathf.Lerp(a: forcePointerPosRed.GetComponent<Image>().fillAmount, b: ( _maxForce / 2 - _curForce ) / ( _maxForce / 2 ), t: _lerdSpeed * Time.deltaTime);
-            
+            forcePointerPosRed.GetComponent<Image>().fillAmount = Mathf.Lerp(a: forcePointerPosRed.GetComponent<Image>().fillAmount, b: (_maxForce / 2 - _curForce) / (_maxForce / 2), t: _lerdSpeed * Time.deltaTime);
         }
-        
     }
-
 }

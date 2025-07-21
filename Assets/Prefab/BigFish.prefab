@@ -98,4 +98,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fishType: 2
-  updateInterval: 1
+  _updateInterval: 3
