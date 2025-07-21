@@ -464,9 +464,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rectTransform: {fileID: 0}
-  _lerpSpeed: 0.1
+  _lerpSpeed: 5
   _maxPressure: 100
-  _curPressure: 75
+  _curPressure: 50
+  _addPressure: 0
 --- !u!1 &406443693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1803,7 +1804,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentFightingFishType: 0
-  _isFishBite: 1
+  _isFishBite: 0
   _isFishing: 0
   _currentBait: {fileID: 0}
 --- !u!4 &1271473088
