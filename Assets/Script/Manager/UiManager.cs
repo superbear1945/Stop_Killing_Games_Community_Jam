@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    public event System.Action<float> OnPressureChange; // 压力变化事件
+    public event Action<float> OnPressureChange; // 压力变化事件
     
     public static UIManager _instance;
     //Bear：在UIManager中，尽量使用Inspector拖拽的方式为属性赋值，比如下面的ForcePointerScript属性
