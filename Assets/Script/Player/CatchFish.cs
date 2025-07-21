@@ -94,17 +94,17 @@ public class CatchFish : MonoBehaviour
 
         Debug.Log("随机值：" + randomValue);
         // 根据随机数和预设概率判断上钩的鱼的类型
-        if (randomValue < 0.05)// 5% 概率是鲨鱼
+        if (randomValue < 0.1)// 10% 概率是鲨鱼
         {
             Debug.Log("检测到有鲨鱼咬钩！");
             return GameManager.FishType._Shark;
         }
-        else if (randomValue < 0.15)// 10% 概率是大鱼
+        else if (randomValue < 0.3)// 20% 概率是大鱼
         {
             Debug.Log("检测到有大鱼咬钩！");
             return GameManager.FishType._Bigfish;
         }
-        else if (randomValue < 0.3)// 15% 概率是小鱼
+        else if (randomValue < 0.5)// 20% 概率是小鱼
         {
             Debug.Log("检测到有小鱼咬钩！");
             return GameManager.FishType._Smallfish;

@@ -3029,6 +3029,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8c6ecb59df06547ab86c6f0c29d120, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _lerdSpeed: 3
+  _dissipateSpeed: 0.7
   _forcePointerScript: {fileID: 2006610404}
   _pressurePanelScript: {fileID: 309158067}
 --- !u!4 &2128166770

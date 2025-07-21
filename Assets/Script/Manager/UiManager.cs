@@ -10,6 +10,12 @@ public class UIManager : MonoBehaviour
     public event Action<float> OnPressureChange; // 压力变化事件
     
     public static UIManager _instance;
+    
+    //控制力量表的系数HeaderAttribute
+    [Header("力量表设置")]
+    public float _lerdSpeed = 2.0f; // 力量表增速度系数
+    public float _dissipateSpeed = 2.0f; // 力量表衰减系数
+
     //Bear：在UIManager中，尽量使用Inspector拖拽的方式为属性赋值，比如下面的ForcePointerScript属性
     [SerializeField] ForcePointerScript _forcePointerScript; //通过在Inspector中拖拽的方式获取力量表指针
     [SerializeField] PressurePanelScript _pressurePanelScript; //通过在Inspector中拖拽的方式获取压力表指针
@@ -55,7 +61,7 @@ public class UIManager : MonoBehaviour
     {
         if(_forcePointerScript._curForce <  _forcePointerScript._maxForce)
         {
-            _forcePointerScript._curForce += _forcePointerScript._lerdSpeed * Time.deltaTime;
+            _forcePointerScript._curForce += _forcePointerScript._lerdSpeed * Time.deltaTime*_lerdSpeed;
         }
     }
 
@@ -64,7 +70,7 @@ public class UIManager : MonoBehaviour
     {
         if (_forcePointerScript._curForce > 0)
         {
-            _forcePointerScript._curForce -= _forcePointerScript._lerdSpeed * Time.deltaTime;
+            _forcePointerScript._curForce -= _forcePointerScript._lerdSpeed * Time.deltaTime*_dissipateSpeed;
         }
         
     }
