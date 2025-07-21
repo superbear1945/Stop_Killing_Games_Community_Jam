@@ -91,6 +91,7 @@ public class UIManager : MonoBehaviour
     // 触发压力变化事件
     public void TriggerPressureChange(float amount)
     {
+        amount += (_forcePointerScript._curForce - 50); //压力表真正的值为当前压力值加上力量表于默认值的差值
         OnPressureChange?.Invoke(amount);
     }
 

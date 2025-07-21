@@ -73,6 +73,7 @@ public class PressurePanelScript : MonoBehaviour
     {
         // Bear: 使用Mathf.Clamp确保当前压力值不会超过设定的最大和最小范围（0到_maxPressure）。
         _curPressure = Mathf.Clamp(_curPressure, 0, _maxPressure);
+
         // Bear: 这是实现平滑过渡的核心。每一帧，我们都让_displayPressure向_curPressure靠近一点。
         // Bear: _lerpSpeed * Time.deltaTime确保了过渡速度在不同帧率下保持一致。
         _displayPressure = Mathf.Lerp(_displayPressure, _curPressure, _lerpSpeed * Time.deltaTime);
